@@ -1,8 +1,11 @@
+import os
+
 import cv2
 import numpy as np
 import time
 import argparse
 import pandas as pd
+import test2
 class Yolov4:
     def __init__(self, weights, cfg, img_size=320):
         self.weights = weights
@@ -18,7 +21,7 @@ class Yolov4:
             confidence_score = []
             ids = []
             cordinates = []
-            Threshold = 0.8
+            Threshold = 0.6
             for i in detections:
                 for j in i:
                     probs_values = j[5:]
@@ -43,6 +46,7 @@ class Yolov4:
                     image):
         try:
             temp = []
+            boundary_of_license_plate = []
             for j in prediction_box.flatten():
                 x, y, w, h = bounding_box[j]
                 x = int(x * width_ratio)
@@ -58,7 +62,12 @@ class Yolov4:
                     cv2.putText(image, label + ' ' + conf_, (x, y - 2), cv2.FONT_HERSHEY_COMPLEX, .8, color, 1)
                     time_str = f"Inference time: {end_time:.3f} sec"
                     cv2.putText(image, time_str, (10, 30), cv2.FONT_HERSHEY_COMPLEX, .5, (156, 0, 166), 1)
-                    print(j, label, conf_, x, y, w, h)
+
+                    # print(j, label, conf_, x, y, w, h)
+
+                    if label == 'number_plate':
+                        test2.get_license_plate_info(image_filename)
+                        test2.get_date_and_time(image_filename)
             return image
 
         except Exception as e:
@@ -94,6 +103,8 @@ if __name__ == "__main__":
 
     if opt.image:
         try:
+            image_filename = os.path.basename(opt.image)
+            # print(f"Image filename: {image_filename}")
             image = cv2.imread(opt.image, 1)
             original_width, original_height = image.shape[1], image.shape[0]
             outcome = obj.Inference(image=image, original_width=original_width, original_height=original_height)
