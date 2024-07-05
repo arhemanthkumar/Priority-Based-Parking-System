@@ -17,7 +17,7 @@ def get_date_and_time(img_name):
     # custom config for tesseract whitelist = r'/usr/share/tesseract-ocr/4.00/tessdata/configs/custom.txt'
     # print(img_name)
 
-    # img_name = os.getcwd() + "/images/" + img_name
+    # img_name = os.getcwd() + "/input_images/" + img_name
     pytesseract.tesseract_cmd = path_to_tesseract
 
     img = Image.open(img_name)

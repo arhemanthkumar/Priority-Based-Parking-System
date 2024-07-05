@@ -1,6 +1,6 @@
 import cv2
 
-image_path = '/home/hemanth/PycharmProjects/Priority-Based-Parking-System/images/TC_00015.jpg'
+image_path = '//TC_00015.jpg'
 image = cv2.imread(image_path, 1)
 
 if image is None:

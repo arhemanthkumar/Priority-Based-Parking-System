@@ -1,22 +1,13 @@
-import os
 import cv2
 import numpy as np
 import time
-import ODS
 import argparse
-import pandas as pd
-import test2
-
-vehicle_type = ""
-lic_no = ""
-
 
 class Yolov4:
-
     def __init__(self, weights, cfg, img_size=320):
         self.weights = weights
         self.cfg = cfg
-        self.classes = ['license_plate', '2_wheeler', '4_wheeler']
+        self.classes = ['number_plate', '2_wheeler', '4_wheeler', 'date', 'time']
         self.Neural_Network = cv2.dnn.readNetFromDarknet(self.cfg, self.weights)
         self.outputs = self.Neural_Network.getUnconnectedOutLayersNames()
         self.COLORS = np.random.randint(0, 255, size=(len(self.classes), 3), dtype="uint8")
@@ -27,7 +18,7 @@ class Yolov4:
             confidence_score = []
             ids = []
             cordinates = []
-            Threshold = 0.6
+            Threshold = 0.8
             for i in detections:
                 for j in i:
                     probs_values = j[5:]
@@ -50,11 +41,7 @@ class Yolov4:
 
     def predictions(self, prediction_box, bounding_box, confidence, class_labels, width_ratio, height_ratio, end_time,
                     image):
-        global vehicle_type
-        global lic_no
         try:
-            temp = []
-            boundary_of_license_plate = []
             for j in prediction_box.flatten():
                 x, y, w, h = bounding_box[j]
                 x = int(x * width_ratio)
@@ -62,23 +49,13 @@ class Yolov4:
                 w = int(w * width_ratio)
                 h = int(h * height_ratio)
                 label = str(self.classes[class_labels[j]])
-                if label not in temp:
-                    temp.append(label)
-                    conf_ = str(round(confidence[j], 2))
-                    color = [int(c) for c in self.COLORS[class_labels[j]]]
-                    cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-                    cv2.putText(image, label + ' ' + conf_, (x, y - 2), cv2.FONT_HERSHEY_COMPLEX, .8, color, 1)
-                    # time_str = f"Inference time: {end_time:.3f} sec"
-                    # cv2.putText(image, time_str, (10, 30), cv2.FONT_HERSHEY_COMPLEX, .5, (156, 0, 166), 1)
-
-                    # print(j, label, conf_, x, y, w, h)
-                    if label != 'license_plate':
-                        print("Vehicle Type: ",label)
-                        vehicle_type = label
-                    if label == 'license_plate':
-                        license_number = test2.get_license_plate_info(image_filename, x, y, w, h)
-                        test2.get_date_and_time(image_filename)
-                        lic_no = license_number
+                conf_ = str(round(confidence[j], 2))
+                color = [int(c) for c in self.COLORS[class_labels[j]]]
+                cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+                cv2.putText(image, label + ' ' + conf_, (x, y - 2), cv2.FONT_HERSHEY_COMPLEX, .5, color, 2)
+                time_str = f"Inference time: {end_time:.3f} sec"
+                cv2.putText(image, time_str, (10, 30), cv2.FONT_HERSHEY_COMPLEX, .5, (156, 0, 166), 1)
+                print(label, conf_, x, y, w, h)
             return image
 
         except Exception as e:
@@ -101,12 +78,6 @@ class Yolov4:
         except Exception as e:
             print(f'Error in : {e}')
 
-    def getLicenseAndClass(self):
-        get_lic_no = lic_no
-        get_vehicle_class = vehicle_type
-        print("From here", get_vehicle_class)
-        return get_lic_no, get_vehicle_class
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='yolov4.weights', help='weights path')
@@ -120,30 +91,12 @@ if __name__ == "__main__":
 
     if opt.image:
         try:
-            # print(os.getcwd()) #Our working directory
-            os.chdir("input_images") #Directory of the input_images
-
-            image_path = opt.image
-            image_filename = os.path.basename(opt.image)
-
-            if not os.path.isfile(image_path): #If the image is not found in the directory, raises the FileNotFoundError exception
-                raise FileNotFoundError(f"Error: File {image_path} does not exist or cannot be read.")
             image = cv2.imread(opt.image, 1)
             original_width, original_height = image.shape[1], image.shape[0]
             outcome = obj.Inference(image=image, original_width=original_width, original_height=original_height)
             cv2.imshow('Inference', outcome)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
-            os.chdir("..") #Going back to the parent directory
-            # print(os.getcwd())
-            # testing_python_simple.dateplease()
-            print("IMP1",vehicle_type)
-            print("IMP2",lic_no)
-
-
-
-
-            ODS.ods(vehicle_type, lic_no)
         except Exception as e:
             print(f'Error in : {e}')
 
@@ -172,4 +125,3 @@ if __name__ == "__main__":
             cv2.destroyAllWindows()
         except Exception as e:
             print(f'Error in : {e}')
-
