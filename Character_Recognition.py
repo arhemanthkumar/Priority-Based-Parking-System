@@ -42,10 +42,10 @@ def get_date_and_time(img_name):
     comma = text.index(",")
     global date
     date = text[:comma]
-    print("Date : ", date)
+    # print("Date : ", date)
     global time
     time = text[comma + 2 : index_of_last_char+1]
-    print("Time : ", time)
+    # print("Time : ", time)
     return date, time
 
 
@@ -72,7 +72,7 @@ def get_license_plate_info(name_of_image, x_recieved, y_recieved, width_recieved
         if char == "\n" or char == "\x0c":
             continue
         modified_data += char
-    print(modified_data)        # We print the modified data in a asingle line
+    # print(modified_data)        # We print the modified data in a asingle line
     # print(len(data))
     cv2.imshow('thresh', thresh)  #entire image with threshold applied
     cv2.imshow('ROI', ROI)  #number_plate with threshold applied and cropped
