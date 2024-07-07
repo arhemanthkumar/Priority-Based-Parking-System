@@ -53,7 +53,7 @@ def get_license_plate_info(name_of_image, x_recieved, y_recieved, width_recieved
     image = cv2.imread(name_of_image, 0)
     thresh = 255 - cv2.threshold(image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
-    # co-ordinates have to be extracted in bounding boxes from revised_ver2.py file
+    # co-ordinates have to be extracted in bounding boxes from main.py file
     # x, y, w, h = 207, 217, 455, 97
     # x_recieved = 207
     # y_recieved = 217
@@ -74,8 +74,8 @@ def get_license_plate_info(name_of_image, x_recieved, y_recieved, width_recieved
         modified_data += char
     # print(modified_data)        # We print the modified data in a asingle line
     # print(len(data))
-    cv2.imshow('thresh', thresh)  #entire image with threshold applied
-    cv2.imshow('ROI', ROI)  #number_plate with threshold applied and cropped
+    # cv2.imshow('thresh', thresh)  #entire image with threshold applied
+    # cv2.imshow('ROI', ROI)  #number_plate with threshold applied and cropped
     cv2.waitKey(0)
     return modified_data
 

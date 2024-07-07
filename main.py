@@ -131,7 +131,7 @@ if __name__ == "__main__":
             image = cv2.imread(opt.image, 1)
             original_width, original_height = image.shape[1], image.shape[0]
             outcome = obj.Inference(image=image, original_width=original_width, original_height=original_height)
-            cv2.imshow('Inference', outcome)
+            # cv2.imshow('Inference', outcome)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
             os.chdir("..") #Going back to the parent directory
