@@ -81,7 +81,7 @@ def get_license_plate_info(name_of_image, x_recieved, y_recieved, width_recieved
     ROI = thresh[y:y + h, x:x + w]  # Region of Interest (ROI) applies threshold to the paricular co-ordinates passed
 
     '''
-    Few Notes:
+    Important Note:
     The tesseract is an efficient engine while converting image to string as it is trained over many languages
     But it performed poorly, when subjected to reading characters from number plate especially HSRP number plate which are widely used in India
     So, a font called "License Plate" available from the internet, created in the year 2005 and has a close resemblance to the HSRP characters
