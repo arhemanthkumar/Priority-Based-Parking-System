@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Movement Analysis</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .graph-container {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .total-vehicle-count {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .peak-time {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vehicle Movement Analysis</h1>
+    <div class="total-vehicle-count">
+        Live Vehicle Count: {{ total_vehicle_count }}
+    </div>
+    <div class="graph-container">
+        <div id="line-graph"></div>
+    </div>
+    <div class="graph-container">
+        <div id="pie-chart"></div>
+    </div>
+    <div class="peak-time">
+        Peak Time : {{ peak_time.strftime('%Y-%m-%d %H:%M:%S') }}
+    </div>
+
+    <script>
+        var graphs = {{ graphJSON|safe }};
+        var pieChart = {{ pie_chart_JSON|safe }};
+        Plotly.newPlot('line-graph', graphs.data, graphs.layout);
+        Plotly.newPlot('pie-chart', pieChart.data, pieChart.layout);
+    </script>
+</body>
+</html>
