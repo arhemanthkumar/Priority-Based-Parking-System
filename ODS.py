@@ -1,4 +1,4 @@
-import pandas as pd  # imports pandas libraby to handle vehicle data
+import pandas as pd  # imports pandas library to handle vehicle data
 import pyexcel_ods3  # imports pyexcel_ods3 because we are handling files of format .ods instead of .xsl
 from datetime import datetime  # imports time and date module
 import os  # imports os module to get current directory information and allows us to change directory on demand
