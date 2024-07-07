@@ -25,7 +25,7 @@
         .peak-time {
             text-align: center;
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1.5em;
         }
     </style>
 </head>
@@ -41,7 +41,7 @@
         <div id="pie-chart"></div>
     </div>
     <div class="peak-time">
-        Peak Time : {{ peak_time.strftime('%Y-%m-%d %H:%M:%S') }}
+        Peak Time (Maximum Occupied): {{ peak_time }} with {{ peak_occupied }} vehicles
     </div>
 
     <script>
