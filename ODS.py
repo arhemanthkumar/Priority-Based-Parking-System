@@ -2,8 +2,7 @@ import pandas as pd  # imports pandas libraby to handle vehicle data
 import pyexcel_ods3  # imports pyexcel_ods3 because we are handling files of format .ods instead of .xsl
 from datetime import datetime  # imports time and date module
 import os  # imports os module to get current directory information and allows us to change directory on demand
-import \
-    Character_Recognition  # This is another .py file imported to get information of vehicles, status along with date and time
+import Character_Recognition  # This is another .py file imported to get information of vehicles, status along with date and time
 
 date = ""  # date variable to store date
 time = ""  # time variable to store time
