@@ -69,8 +69,8 @@ Leveraging advanced machine learning and computer vision technologies, this syst
 
 
 ## Demo (Must Watch [Mandatory] )
-
-https://www.youtube.com/watch?v=ufMk-Uj_W8c
+[![](https://github.com/arhemanthkumar/Priority-Based-Parking-System/assets/99478864/9d036a23-a4ec-4565-aad1-c47b3fe33ef2)](https://youtu.be/xlV4G3ZH35w)
+https://youtu.be/xlV4G3ZH35w
 
 
 ## Install and Run Locally (For Linux)
