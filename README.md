@@ -68,7 +68,8 @@ Leveraging advanced machine learning and computer vision technologies, this syst
 [![](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/en/3.0.x/)
 
 
-## Demo (Must Watch [Mandatory] )
+## Demo [Mandatory] 
+Click the image or the link below
 [![](https://github.com/arhemanthkumar/Priority-Based-Parking-System/assets/99478864/9d036a23-a4ec-4565-aad1-c47b3fe33ef2)](https://youtu.be/xlV4G3ZH35w)
 https://youtu.be/xlV4G3ZH35w
 
