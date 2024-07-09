@@ -130,6 +130,9 @@ Don't worry, it will be automatically created again when the program starts with
 \
 If you have to run on a single instance of a single image, then run
 
+Make sure to change the --image = "..." directory to the inside of the input_images
+
+
 ```bash
   python3 main.py --image=/home/hemanth/PycharmProjects/Priority-Based-Parking-System/input_images/imgxxx.jpg --img_size=320
 ```
