@@ -68,9 +68,10 @@ Leveraging advanced machine learning and computer vision technologies, this syst
 [![](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/en/3.0.x/)
 
 
-## Demo (Must Watch [Mandatory] )
-
-https://www.youtube.com/watch?v=ufMk-Uj_W8c
+## Demo [Mandatory] 
+Click the image or the link below
+[![](https://github.com/arhemanthkumar/Priority-Based-Parking-System/assets/99478864/9d036a23-a4ec-4565-aad1-c47b3fe33ef2)](https://youtu.be/xlV4G3ZH35w)
+https://youtu.be/xlV4G3ZH35w
 
 
 ## Install and Run Locally (For Linux)
@@ -128,6 +129,9 @@ Don't worry, it will be automatically created again when the program starts with
 
 \
 If you have to run on a single instance of a single image, then run
+
+Make sure to change the --image = "..." directory to the inside of the input_images
+
 
 ```bash
   python3 main.py --image=/home/hemanth/PycharmProjects/Priority-Based-Parking-System/input_images/imgxxx.jpg --img_size=320
