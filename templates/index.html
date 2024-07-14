@@ -5,13 +5,36 @@
     <title>Vehicle Movement Analysis</title>
     <!-- Include Plotly library for creating graphs -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #line-graph, #pie-chart {
+            width: 80%;
+            max-width: 1200px;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        h1, h2, p {
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Vehicle Movement Analysis</h1>
     <!-- Container for the line graph -->
-    <div id="line-graph" style="width: 100%; height: 400px;"></div>
+    <div id="line-graph"></div>
     <!-- Container for the pie chart -->
-    <div id="pie-chart" style="width: 100%; height: 400px;"></div>
+    <div id="pie-chart"></div>
 
     <h2>Statistics</h2>
     <!-- Display the total vehicle count (currently parked vehicles) -->
