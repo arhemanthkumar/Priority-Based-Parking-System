@@ -1,49 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> <!-- Sets the character encoding for the document -->
-    <title>Vehicle Movement Analysis</title> <!-- Display the title of the web page -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- Includes the Plotly library for rendering interactive graphs available from app.py -->
-    <style>
-        body {
-            font-family: Arial, sans-serif; /* Sets the font for the entire page */
-        }
-        h1 {
-            text-align: center; /* Centers the header text */
-            margin-top: 20px; /* Adds some space above the header */
-        }
-        .graph-container {
-            width: 80%; /* Sets the width of the graph containers */
-            margin: auto; /* Centers the graph containers horizontally */
-            margin-top: 50px; /* Adds some space above the graph containers */
-        }
-        .total-vehicle-count, .peak-time {
-            text-align: center; /* Centers the text for vehicle count and peak time */
-            margin-top: 20px; /* Adds some space above these elements */
-            font-size: 1.5em; /* Increases the font size for better readability */
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Vehicle Movement Analysis</title>
+    <!-- Include Plotly library for creating graphs -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Vehicle Movement Analysis</h1> <!-- Main heading for the page -->
-    <div class="total-vehicle-count">
-        Live Vehicle Count: {{ total_vehicle_count }} <!-- Displays the live vehicle count passed from Flask (app.py)-->
-    </div>
-    <div class="graph-container">
-        <div id="line-graph"></div> <!-- Container for the line graph -->
-    </div>
-    <div class="graph-container">
-        <div id="pie-chart"></div> <!-- Container for the pie chart -->
-    </div>
-    <div class="peak-time">
-        Peak Time (Maximum Occupied): {{ peak_time }} with {{ peak_occupied }} vehicles <!-- Displays peak time and number of vehicles -->
-    </div>
+    <h1>Vehicle Movement Analysis</h1>
+    <!-- Container for the line graph -->
+    <div id="line-graph" style="width: 100%; height: 400px;"></div>
+    <!-- Container for the pie chart -->
+    <div id="pie-chart" style="width: 100%; height: 400px;"></div>
+
+    <h2>Statistics</h2>
+    <!-- Display the total vehicle count (currently parked vehicles) -->
+    <p>Total Vehicle Count: {{ total_vehicle_count }}</p>
+    <!-- Display the peak time (time when the occupied count was maximum) -->
+    <p>Peak Time: {{ peak_time }}</p>
+    <!-- Display the peak occupied count -->
+    <p>Peak Occupied: {{ peak_occupied }}</p>
+    <!-- Display the count of registered vehicles -->
+    <p>Registered Vehicle Count: {{ registered_vehicle_count }}</p>
 
     <script>
-        var graphs = {{ graphJSON|safe }}; /* Safely inserts the JSON-encoded line graph data from Flask */
-        var pieChart = {{ pie_chart_JSON|safe }}; /* Safely inserts the JSON-encoded pie chart data from Flask */
-        Plotly.newPlot('line-graph', graphs.data, graphs.layout); /* Renders the line graph using Plotly */
-        Plotly.newPlot('pie-chart', pieChart.data, pieChart.layout); /* Renders the pie chart using Plotly */
+        // Convert the JSON-encoded graph data to JavaScript objects
+        var lineGraph = {{ graphJSON | safe }};
+        var pieChart = {{ pie_chart_JSON | safe }};
+
+        // Render the line graph and pie chart using Plotly
+        Plotly.newPlot('line-graph', lineGraph.data, lineGraph.layout);
+        Plotly.newPlot('pie-chart', pieChart.data, pieChart.layout);
     </script>
 </body>
 </html>

@@ -27,6 +27,13 @@ def read_vehicle_data():
 
     return df  # Returns the cleaned DataFrame
 
+def read_registered_vehicles():
+    registered_file = 'registered_vehicles.ods'  # Path to the ODS file containing registered vehicle data
+    registered_data = pyexcel_ods3.get_data(registered_file)  # Reads data from the ODS file
+    registered_sheet_name = list(registered_data.keys())[0]  # Gets the name of the first sheet, assuming it is the 1st sheet
+    registered_list = registered_data[registered_sheet_name]  # Extracts data from the first sheet
+    return len(registered_list) - 1  # Subtracting 1 to exclude the header row
+
 def create_line_graph(df):
     line_graph = go.Figure()  # Creates a new Plotly figure for the line graph
     # Adds a trace for occupied parking spaces
@@ -65,8 +72,16 @@ def index():
     peak_time = peak_time_row['Date_Time']  # Extracts the peak time
     peak_occupied = peak_time_row['Occupied']  # Extracts the peak occupied count
 
+    registered_vehicle_count = read_registered_vehicles()  # Reads the count of registered vehicles
+
     # Renders the index.html template with the generated graphs and statistics
-    return render_template('index.html', graphJSON=line_graph, pie_chart_JSON=pie_chart, total_vehicle_count=total_vehicle_count, peak_time=peak_time, peak_occupied=peak_occupied)
+    return render_template('index.html',
+                           graphJSON=line_graph,
+                           pie_chart_JSON=pie_chart,
+                           total_vehicle_count=total_vehicle_count,
+                           peak_time=peak_time,
+                           peak_occupied=peak_occupied,
+                           registered_vehicle_count=registered_vehicle_count)
 
 if __name__ == '__main__':  # Ensures the app runs only if this script is executed directly
     app.run(debug=True)  # Runs the Flask app in debug mode
